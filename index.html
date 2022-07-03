@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download PDF</title>
+</head>
+<body>
+
+    <button onclick="download()">Download</button>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+<script>
+    function download(){
+        axios({
+            // url: 'https://tumaparcel.up.railway.app/receipts/20220702-3PNNHM4.pdf',
+            url: 'https://source.unsplash.com/random/500x500',
+            method: "GET",
+            responseType: "blob"
+        }).then( (response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]))
+            const link = document.createElement("a")
+            link.href = url
+            //link.setAttribute("download", "file.pdf")
+            link.setAttribute("download", "file.jpg")
+            document.body.appendChild(link)
+            link.click()
+        }).catch((error) => console.log("ERROR", error))
+    }
+</script>
+</html>
